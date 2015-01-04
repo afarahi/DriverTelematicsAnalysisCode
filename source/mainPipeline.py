@@ -17,7 +17,7 @@ class MyApplication:
 
       counterP = 0; counterN = 0
 
-      fnameSave = './outputData/%s.csv'%driverID
+      fnameSave = '../outputData/%s.csv'%driverID
       f = open(fnameSave,'w')
 
       #_, meanV, errV = self.driver.makePDFVelocityOfDriver(driverID)
@@ -38,6 +38,8 @@ class MyApplication:
 
          if ( accCatTrip == accCat ):           counterP += 1
          else:                                  counterN += 1
+
+      f.close()
 
       print counterP, counterN, float(counterP)/200.0
 
