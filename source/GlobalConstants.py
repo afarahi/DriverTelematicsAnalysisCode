@@ -11,6 +11,6 @@ class GlobalConstants:
 
       self.ACCELERATION_BINS_NUM = 40
       self.ACCELERATION_MAX = 5
-      self.ACCELERATION_MAX = 1
+      self.ACCELERATION_MIN = 1
 
 

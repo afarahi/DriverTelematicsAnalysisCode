@@ -59,8 +59,35 @@ class driver:
 
 
 
+   def categoryOfAcceleration(self,driverID):
 
+      pdf = np.zeros(self.CONS.ACCELERATION_BINS_NUM)
+ 
+      #generating velocity pdf
+      for tripID in range(1,self.CONS.NUM_OF_TRIPS):
 
+         fname = '../drivers/%s/%i.csv'%(driverID, tripID)
+         x,y = np.loadtxt(fname, skiprows=1, delimiter=',', unpack=True)
+         velocityX = (x[1:]-x[:-1]); velocityY = (y[1:]-y[:-1])
+         acceleration =  np.sqrt(   (velocityX[1:]-velocityX[:-1])**2 \
+                                  + (velocityY[1:]-velocityY[:-1])**2 )
+      
+         hist,bins = np.histogram(acceleration,\
+                          bins=self.CONS.ACCELERATION_BINS_NUM,\
+                          range=[self.CONS.ACCELERATION_MIN,\
+                                 self.CONS.ACCELERATION_MAX],\
+                                     normed=True)
+
+         if np.isnan(hist[1]): continue
+
+         pdf += hist
+           
+      print driverID + ' acceleration catagory is determined.'
+
+      if ( sum(pdf[8:12])-sum(pdf[12:16]) < 0 ):
+         return 1
+      else:
+         return 2
 
 
 
